@@ -72,8 +72,8 @@ function moveX() {
 
 function fstart() {
     if (!mijnInterval1) {
-        mijnInterval1 = setInterval(moveY, 1);
-        mijnInterval2 = setInterval(moveX, 1);
+        mijnInterval1 = setInterval(moveY, stepX);
+        mijnInterval2 = setInterval(moveX, stepY);
         stepX = Math.round(Math.random()) ? -initStep : initStep; // als de random nummer 0 is dan gaat hij -initStep doen, als hij 1 is dan doet hij inittep
         stepY = Math.round(Math.random()) ? -initStep : initStep;
     }
@@ -109,6 +109,7 @@ function keyUpHandler(event) {
 }
 
 function controlManager() {
+    
     if (pressedKeys['KeyW']) {
         let yPos = left.offsetTop;
         if (yPos + stepYUp > 0) {

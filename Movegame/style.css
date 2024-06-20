@@ -54,17 +54,16 @@ body {
 button {
     height: 40px;
     width: 80px;
-    margin: 10px;
-}
-
-#rightbar {
-    padding: 10px;
 }
 
 #btns {
     border: 3px solid grey;
     border-radius: 15px;
     margin: 2px;
+    height: fit-content;
+    display: flex;
+    flex-direction:column;
+    gap: 100px;
 }
 
 #XenY, #score {
