@@ -1,0 +1,91 @@
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.button-wrapper
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 5px;
+    border: 5px solid black;
+    border-radius: 9px;
+    background-color: lightblue;
+    user-select: none;
+    text-align: right;
+
+    position:absolute;
+}
+
+#display
+{
+    grid-column-start: 1;
+    grid-column-end: 5;
+    background: linear-gradient(90deg, rgba(210,210,210,1) 0%, rgba(255,252,252,1) 100%);  
+    border: 2px solid black;
+    height: 100px;
+    margin: 7px;
+    border-radius: 9px;
+    font-size: 45px;
+    padding-right: 7px;
+}
+
+img
+{
+    height: 75px;
+    width: 75px;
+}
+
+button
+{
+    height: 75px;
+    border-radius: 9px;
+    background-color: white;
+    font-size: 50px;    
+}
+
+button:hover
+{
+    background-color: rgb(186, 186, 186);
+}
+
+button.wide 
+{
+    width: 300px;
+}
+
+button:focus
+{
+    background-color:aliceblue;
+}
+
+button:active
+{
+    background-color:rgb(85, 85, 85);
+}
+
+#BTN1
+{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+#BTN15
+{
+    background: transparent;
+    border: none;
+}    
+
+.bx.bx-move
+{
+    font-size: 50px;
+    color: grey;
+    grid-column-start: 4;
+
+    cursor: pointer;
+    display: inline;
+    /* position:sticky; */
+}

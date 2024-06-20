@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./style.css">
+    <title>Calculator</title>
+</head>
+<body>
+    
+    <div class="button-wrapper">
+        <i class='bx bx-move'></i>
+        <div id="display">Calculator</div>
+    </div>
+
+    <script>
+let display = document.getElementById('display');
+        let input = '';
+        let operators = ['/', 'X', '-', '+'];
+
+        function updateDisplay(value) {
+            display.textContent = value;
+        }
+
+        for (let i = 1; i <= 18; i++) { //button loop
+            let button = document.createElement("button");
+            button.id = "BTN" + i;
+
+            if (i === 1) {
+                button.classList.add("wide");
+                button.innerHTML = "<img src=\"bx-arrow-back.svg\">";
+                button.addEventListener('click', () => {
+                    input = input.slice(0, -1);
+                    updateDisplay(input || 'Calculator');
+                });
+            }
+            if (i === 2) button.innerHTML = "/";
+            if (i === 3) button.innerHTML = "7";
+            if (i === 4) button.innerHTML = "8";
+            if (i === 5) button.innerHTML = "9";
+            if (i === 6) button.innerHTML = "x";
+            if (i === 7) button.innerHTML = "4";
+            if (i === 8) button.innerHTML = "5";
+            if (i === 9) button.innerHTML = "6";
+            if (i === 10) button.innerHTML = "-";
+            if (i === 11) button.innerHTML = "1";
+            if (i === 12) button.innerHTML = "2";
+            if (i === 13) button.innerHTML = "3";
+            if (i === 14) button.innerHTML = "+";
+            if (i === 16) button.innerHTML = "0";
+            if (i === 17) button.innerHTML = ",";
+            if (i === 18) {
+                button.innerHTML = "=";
+                button.addEventListener('click', () => {
+                    try {
+                        let rekenen = input.replace(/x/, '*  ').replace(/,/, '.');
+                        let resultaat = eval(rekenen);
+                        updateDisplay(resultaat);
+                        input = resultaat.toString();
+                    } catch {
+                        updateDisplay('Error');
+                        input = '';
+                    }
+                });
+        } //button loop
+
+            if (i !== 1 && i !== 18) {
+                button.addEventListener('click', () => {
+                    input += button.innerHTML;
+                    updateDisplay(input);
+                });
+            }
+
+            document.querySelector(".button-wrapper").appendChild(button);
+        }
+
+
+
+// het laten bewegen 
+const card = document.querySelector('.button-wrapper');
+        const moveIcon = document.querySelector('.bx.bx-move');
+        let startX, startY, newX, newY;
+
+        moveIcon.addEventListener('mousedown', mouseDown);
+
+        function mouseDown(e) {
+            startX = e.clientX;
+            startY = e.clientY;
+
+            document.addEventListener('mousemove', mouseMove);
+            document.addEventListener('mouseup', mouseUp);
+        }
+
+        function mouseMove(e) {
+            newX = startX - e.clientX;
+            newY = startY - e.clientY;
+
+            startX = e.clientX;
+            startY = e.clientY;
+
+            card.style.top = (card.offsetTop - newY) + 'px';
+            card.style.left = (card.offsetLeft - newX) + 'px';
+        }
+
+        function mouseUp() {
+            document.removeEventListener('mousemove', mouseMove);
+            document.removeEventListener('mouseup', mouseUp);
+        }
+
+    </script> 
+</body>
+</html>

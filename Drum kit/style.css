@@ -1,0 +1,40 @@
+#drum1
+{
+    display: flex;
+    width: 1200px;
+    height: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hi-hat
+{
+    position: absolute;
+    top: 552px;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    background: transparent;
+    /* border: none; */ 
+}
+
+
+#drum2
+{
+    display: flex;
+    width: 700px;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button:active
+{
+    box-shadow: 5px 5px 5px #00ff00;
+}
+
+body
+{
+    background-image: url("background.webp");
+    background-repeat: no-repeat;
+    background-size:cover;
+}

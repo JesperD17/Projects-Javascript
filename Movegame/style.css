@@ -1,0 +1,69 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+#field {
+    background-color: darkgreen;
+    height: 600px;
+    width: 800px;
+    position: relative;
+    border: 5px solid black;
+}
+
+#moveDiv {
+    background-color: white;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 8px;
+}
+
+#leftPong, #rightPong {
+    background-color: red;
+    height: 100px;
+    width: 20px;
+    position: absolute;
+    border-radius: 100px;
+    border: 2px solid #000;
+}
+
+#leftPong {
+    top: 45%;
+    left: 2%;
+}
+
+#rightPong {
+    top: 45%;
+    left: 95%;
+}
+
+button {
+    height: 40px;
+    width: 80px;
+    margin: 10px;
+}
+
+#rightbar {
+    padding: 10px;
+}
+
+#btns {
+    border: 3px solid grey;
+    border-radius: 15px;
+    margin: 2px;
+}
+
+#XenY, #score {
+    margin: 2px;
+    font-size: 20px;
+    border: 3px solid grey;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+#stapX, #stapY {
+    padding: 10px;
+}

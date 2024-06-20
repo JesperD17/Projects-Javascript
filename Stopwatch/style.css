@@ -1,0 +1,99 @@
+body
+{
+    background-color: lightblue;
+}
+
+#container
+{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+#style1
+{
+    background: linear-gradient(90deg, rgba(218,218,218,1) 0%, rgba(204,204,204,1) 51%, rgba(143,143,143,1) 100%);
+    border: 4px solid black;
+    width: 750px;
+    height: 500px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+#style2
+{
+    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(173,15,15,1) 51%, rgba(255,101,101,1) 100%);;
+    border: 3px solid black;
+    width: 675px;
+    height: 450px;
+    border-radius: 100px;
+}
+
+#pause
+{
+    background-color: lightgreen;
+    height: 100px;
+    width: 150px;
+    border-radius: 20px;
+
+    position: absolute;
+    top: 60%;
+    left: 14%;
+}
+
+#clear
+{
+    background-color: red;
+    height: 100px;
+    width: 150px;
+    border-radius: 20px;
+
+    position: absolute;
+    top: 60%;
+    left: 67%;
+}
+
+#start
+{
+    background-color: lightblue;
+    height: 100px;
+    width: 150px;
+    border-radius: 20px;
+
+    position: absolute;
+    top: 60%;
+    left: 40%;
+
+    display:flex;
+}
+
+#timer
+{
+    background-color: white;
+    height: 100px;
+    width: 400px;
+    border-radius: 10px;
+    border: 4px solid black;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 35%;
+    left: 23%;
+    font-size: 50px;
+    font-family: Brush Script MT;
+    display:flex;
+}
+
+button
+{
+    align-items: center;
+    justify-content: center;
+    font-family: Brush Script MT;
+    font-size: 50px;
+}
+
+
+
