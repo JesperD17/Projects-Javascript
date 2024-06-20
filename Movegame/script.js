@@ -5,7 +5,7 @@ let stepX = 0;
 let stepY = 0;
 let stepYUp = -15;
 let stepXDown = 15;
-let P1P = 0; //P1P = player 1 points of speler 1 punten
+let P1P = 0; //P1P = player 1, point(s) of speler 1, punt(en)
 let P2P = 0;
 let field = document.getElementById("field");
 let mvDiv = document.getElementById("moveDiv");
@@ -20,14 +20,15 @@ let mvDivRect = mvDiv.getBoundingClientRect();
 let pongLeft = left.getBoundingClientRect();
 let pongRight = right.getBoundingClientRect();
 
+
 function clear() {
     clearInterval(mijnInterval1);
     clearInterval(mijnInterval2);
-    mijnInterval1 = null;
-    mijnInterval2 = null;
+    mijnInterval1 = 0;
+    mijnInterval2 = 0;
 }
 
-document.addEventListener("DOMContentLoaded", () => { 
+document.addEventListener("DOMContentLoaded", () => { // voordat de movediv automatisch beweegt gaat hij stilstaan met de clear functie
     clear();
 });
 
@@ -49,27 +50,35 @@ function moveX() {
     if (mvDivRect.left <= pongLeft.right && mvDivRect.top >= pongLeft.top && mvDivRect.bottom <= pongLeft.bottom) {
         stepX = initStep;
         initStep = initStep + 0.1;
-    }
+    } 
+    // else {
+    //     document.getElementById("count1");
+    //     P1P = +P1P
+
+    // }
+
     if (mvDivRect.right >= pongRight.left && mvDivRect.top >= pongRight.top && mvDivRect.bottom <= pongRight.bottom) {
         stepX = -initStep;
         initStep = initStep + 0.1;
     }
     if (xPos < 1 ) {
         alert("Game Over");
-        freset();
+            freset();
+            
     } 
     if (xPos > width - 1) {
 
         alert("Game Over");
             freset();
+
     }
 }
 
 function fstart() {
     if (!mijnInterval1) {
-        mijnInterval1 = setInterval(moveY, 10);
-        mijnInterval2 = setInterval(moveX, 10);
-        stepX = Math.round(Math.random()) ? -initStep : initStep;
+        mijnInterval1 = setInterval(moveY, 1);
+        mijnInterval2 = setInterval(moveX, 1);
+        stepX = Math.round(Math.random()) ? -initStep : initStep; // als de random nummer 0 is dan gaat hij -initStep doen, als hij 1 is dan doet hij inittep
         stepY = Math.round(Math.random()) ? -initStep : initStep;
     }
 }
@@ -78,10 +87,9 @@ function fstop() {
     clear();
 }
 
-function freset() { // 50% dus midden in de field
+function freset() { // 50% dus het midden in de field
     clear();
-    
-    mvDiv.style.left = "50%";
+    mvDiv.style.left = "49%";
     mvDiv.style.top = "50%";
 }
 
