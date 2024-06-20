@@ -42,18 +42,14 @@ function moveX() {
         stepX = -stepX;
     }
 
-    if (mvDivRect.right >= right.offsetLeft && // borders
-        mvDivRect.left <= right.offsetLeft + right.offsetWidth &&
-        mvDivRect.top + mvDivRect.height >= right.offsetTop &&
-        mvDivRect.top <= right.offsetTop + right.offsetHeight) {
-        stepX = -initStep;
+    // Bat collision detection
+    if (mvDivRect.left <= pongLeft.right && mvDivRect.top >= pongLeft.top && mvDivRect.bottom <= pongLeft.bottom) {
+        stepX = -stepX;
+        console.log("Collision");
     }
-
-    if (mvDivRect.left <= left.offsetLeft + left.offsetWidth &&
-        mvDivRect.right >= left.offsetLeft &&
-        mvDivRect.top + mvDivRect.height >= left.offsetTop &&
-        mvDivRect.top <= left.offsetTop + left.offsetHeight) {
-        stepX = initStep;
+    if (mvDivRect.left >= pongRight.left && mvDivRect.left + mvDivRect.width <= pongRight.left && mvDivRect.top >= pongRight.top && mvDivRect.bottom <= pongRight.bottom) {
+        stepX = -stepX;
+        console.log("Collision");
     }
 
     mvDiv.style.left = (xPos + stepX) + "px";
@@ -90,6 +86,7 @@ let controlManagerInterval;
 let controlManagerRectRefreshIndex = 0; 
 
 function keyDownHandler(event) {
+    if (pressedKeys[event.code]) return;
     pressedKeys[event.code] = true;
     if (Object.keys(pressedKeys).length >= 1) {
         clearInterval(controlManagerInterval);
@@ -129,13 +126,14 @@ function controlManager() {
         }
     }
 
-    if (controlManagerRectRefreshIndex >= 10) {
-        pongLeft = left.getBoundingClientRect();
-        pongRight = right.getBoundingClientRect();
-        controlManagerRectRefreshIndex = 0;
-    } else {
-        controlManagerRectRefreshIndex += 1;
-    }
+    console.log("Move");
+    pongLeft = left.getBoundingClientRect();
+    pongRight = right.getBoundingClientRect();
+    // if (controlManagerRectRefreshIndex >= 10) {
+    //     controlManagerRectRefreshIndex = 0;
+    // } else {
+    //     controlManagerRectRefreshIndex += 1;
+    // }
 }
 
 document.addEventListener('keydown', keyDownHandler);
