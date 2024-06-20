@@ -1,10 +1,10 @@
 let mijnInterval1 = null;
 let mijnInterval2 = null;
-let initStep = 1;
+let initStep = 3;
 let stepX = 0;
 let stepY = 0;
-let stepYUp = -10;
-let stepXDown = 10;
+let stepYUp = -15;
+let stepXDown = 15;
 let field = document.getElementById("field");
 let mvDiv = document.getElementById("moveDiv");
 const left = document.getElementById('leftPong');
@@ -38,22 +38,18 @@ function moveX() {
     let xPos = mvDiv.offsetLeft;
     mvDivRect = mvDiv.getBoundingClientRect();
 
-    if (xPos + stepX < 0 || xPos + stepX > width) {
+    if (xPos + stepX < 0 ) {
         stepX = -stepX;
     }
 
-    if (mvDivRect.right >= right.offsetLeft && // borders
-        mvDivRect.left <= right.offsetLeft + right.offsetWidth &&
-        mvDivRect.top + mvDivRect.height >= right.offsetTop &&
-        mvDivRect.top <= right.offsetTop + right.offsetHeight) {
-        stepX = -initStep;
-    }
-
-    if (mvDivRect.left <= left.offsetLeft + left.offsetWidth &&
-        mvDivRect.right >= left.offsetLeft &&
-        mvDivRect.top + mvDivRect.height >= left.offsetTop &&
-        mvDivRect.top <= left.offsetTop + left.offsetHeight) {
+    // Check for bat collision
+    if (mvDivRect.left <= pongLeft.right && mvDivRect.top >= pongLeft.top && mvDivRect.bottom <= pongLeft.bottom) {
         stepX = initStep;
+        initStep = initStep + 1;
+    }
+    if (mvDivRect.right >= pongRight.left && mvDivRect.top >= pongRight.top && mvDivRect.bottom <= pongRight.bottom) {
+        stepX = -initStep;
+        initStep = initStep + 1;
     }
 
     mvDiv.style.left = (xPos + stepX) + "px";
@@ -129,13 +125,8 @@ function controlManager() {
         }
     }
 
-    if (controlManagerRectRefreshIndex >= 10) {
-        pongLeft = left.getBoundingClientRect();
-        pongRight = right.getBoundingClientRect();
-        controlManagerRectRefreshIndex = 0;
-    } else {
-        controlManagerRectRefreshIndex += 1;
-    }
+    pongLeft = left.getBoundingClientRect();
+    pongRight = right.getBoundingClientRect();
 }
 
 document.addEventListener('keydown', keyDownHandler);
