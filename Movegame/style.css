@@ -67,3 +67,13 @@ button {
 #stapX, #stapY {
     padding: 10px;
 }
+
+#lijn
+{
+    left: 50%;
+    background-color: white;
+    width: 5%;
+    height: 100%;
+    position: absolute;
+    border: 3px black solid;
+}

@@ -1,10 +1,12 @@
 let mijnInterval1 = null;
 let mijnInterval2 = null;
-let initStep = 3;
+let initStep = 1;
 let stepX = 0;
 let stepY = 0;
 let stepYUp = -15;
 let stepXDown = 15;
+let P1P = 0; //P1P = player 1 points of speler 1 punten
+let P2P = 0;
 let field = document.getElementById("field");
 let mvDiv = document.getElementById("moveDiv");
 const left = document.getElementById('leftPong');
@@ -18,12 +20,15 @@ let mvDivRect = mvDiv.getBoundingClientRect();
 let pongLeft = left.getBoundingClientRect();
 let pongRight = right.getBoundingClientRect();
 
-document.addEventListener("DOMContentLoaded", () => { 
+function clear() {
     clearInterval(mijnInterval1);
     clearInterval(mijnInterval2);
     mijnInterval1 = null;
     mijnInterval2 = null;
-    fstart();
+}
+
+document.addEventListener("DOMContentLoaded", () => { 
+    clear();
 });
 
 function moveY() {
@@ -38,27 +43,26 @@ function moveY() {
 function moveX() {
     let xPos = mvDiv.offsetLeft;
     mvDivRect = mvDiv.getBoundingClientRect();
+    mvDiv.style.left = (xPos + stepX) + "px";
 
     // Check for bat collision
     if (mvDivRect.left <= pongLeft.right && mvDivRect.top >= pongLeft.top && mvDivRect.bottom <= pongLeft.bottom) {
         stepX = initStep;
-        initStep = initStep + 1;
+        initStep = initStep + 0.1;
     }
     if (mvDivRect.right >= pongRight.left && mvDivRect.top >= pongRight.top && mvDivRect.bottom <= pongRight.bottom) {
         stepX = -initStep;
-        initStep = initStep + 1;
+        initStep = initStep + 0.1;
     }
     if (xPos < 1 ) {
         alert("Game Over");
+        freset();
+    } 
+    if (xPos > width - 1) {
 
-    } else if (xPos > width - 1) {
         alert("Game Over");
-        clearInterval(mijnInterval1);
-        clearInterval(mijnInterval2);
-        mijnInterval1 = null;
-        mijnInterval2 = null;
+            freset();
     }
-    mvDiv.style.left = (xPos + stepX) + "px";
 }
 
 function fstart() {
@@ -71,17 +75,11 @@ function fstart() {
 }
 
 function fstop() {
-    clearInterval(mijnInterval1);
-    clearInterval(mijnInterval2);
-    mijnInterval1 = null;
-    mijnInterval2 = null;
+    clear();
 }
 
-function freset() {
-    clearInterval(mijnInterval1);
-    clearInterval(mijnInterval2);
-    mijnInterval1 = null;
-    mijnInterval2 = null;
+function freset() { // 50% dus midden in de field
+    clear();
     
     mvDiv.style.left = "50%";
     mvDiv.style.top = "50%";
