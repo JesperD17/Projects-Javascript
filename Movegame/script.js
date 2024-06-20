@@ -5,8 +5,8 @@ let stepX = 0;
 let stepY = 0;
 let stepYUp = -15;
 let stepXDown = 15;
-let P1P = 0; //P1P = player 1, point(s) of speler 1, punt(en)
-let P2P = 0;
+let P1P = 1; //P1P = player 1, point(s) of speler 1, punt(en)
+let P2P = 1;
 let field = document.getElementById("field");
 let mvDiv = document.getElementById("moveDiv");
 const left = document.getElementById('leftPong');
@@ -51,26 +51,22 @@ function moveX() {
         stepX = initStep;
         initStep = initStep + 0.1;
     } 
-    // else {
-    //     document.getElementById("count1");
-    //     P1P = +P1P
-
-    // }
 
     if (mvDivRect.right >= pongRight.left && mvDivRect.top >= pongRight.top && mvDivRect.bottom <= pongRight.bottom) {
         stepX = -initStep;
         initStep = initStep + 0.1;
     }
     if (xPos < 1 ) {
-        alert("Game Over");
-            freset();
-            
+        alert("Game Over"); // elke keer als de movediv de linker kant aanraakt.
+        freset();
+        document.getElementById("count1").innerHTML = P1P;
+        P1P++;
     } 
     if (xPos > width - 1) {
-
         alert("Game Over");
-            freset();
-
+        freset();
+        document.getElementById("count2").innerHTML = P2P;
+        P2P++;
     }
 }
 
