@@ -28,19 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function moveY() {
     let yPos = mvDiv.offsetTop;
-    if (yPos + stepY < 0 || yPos + stepY > height) {
+    if (yPos + stepY < 0 || yPos + stepY > height) { // hitbox bovenste en onderste lijn.
         stepY = -stepY;
     }
-    mvDiv.style.top = (yPos + stepY) + "px";
+    
+    mvDiv.style.top = (yPos + stepY) + "px"; // laat de movediv op de Y bewegen.
 }
 
 function moveX() {
     let xPos = mvDiv.offsetLeft;
     mvDivRect = mvDiv.getBoundingClientRect();
-
-    if (xPos + stepX < 0 ) {
-        stepX = -stepX;
-    }
 
     // Check for bat collision
     if (mvDivRect.left <= pongLeft.right && mvDivRect.top >= pongLeft.top && mvDivRect.bottom <= pongLeft.bottom) {
@@ -51,7 +48,16 @@ function moveX() {
         stepX = -initStep;
         initStep = initStep + 1;
     }
+    if (xPos < 1 ) {
+        alert("Game Over");
 
+    } else if (xPos > width - 1) {
+        alert("Game Over");
+        clearInterval(mijnInterval1);
+        clearInterval(mijnInterval2);
+        mijnInterval1 = null;
+        mijnInterval2 = null;
+    }
     mvDiv.style.left = (xPos + stepX) + "px";
 }
 
