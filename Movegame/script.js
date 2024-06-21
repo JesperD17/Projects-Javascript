@@ -70,7 +70,7 @@ function moveX() {
         mvDivRect.top <= pongLeft.bottom && mvDivRect.bottom >= pongLeft.top) {
             stepX = -stepX;
             console.log("Collision");
-        }
+    }
     if (mvDivRect.right >= pongRight.left && mvDivRect.left <= pongRight.right &&
         mvDivRect.top <= pongRight.bottom && mvDivRect.bottom >= pongRight.top) {
             stepX = -stepX;
@@ -89,7 +89,7 @@ function moveX() {
         P2P++;
     }
     mvDiv.style.left = (xPos + stepX) + "px";
-            
+    
 }
 
 
