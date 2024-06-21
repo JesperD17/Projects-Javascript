@@ -52,18 +52,20 @@ body {
 }
 
 button {
-    height: 40px;
+    height: 80px;
     width: 80px;
+    color: white;
+    background-color: black;
 }
 
 #btns {
     border: 3px solid grey;
     border-radius: 15px;
+    padding: 5px;
     margin: 2px;
-    height: fit-content;
     display: flex;
     flex-direction:column;
-    gap: 100px;
+    gap: 30%;
 }
 
 #XenY, #score {
@@ -81,17 +83,17 @@ button {
 #counts
 {
     color: white;
-    font-size: 30px;
+    font-size: 60px;
 }
 
 #count1
 {
     position: absolute;
-    left: 45%;
+    left: 44%;
 }
 #count2
 {
     position: absolute;
-    left: 55%;
+    left: 53%;
 }
 
