@@ -7,18 +7,10 @@ let stepYUp = -10;
 let stepXDown = 10;
 let P1P = 1; //P1P = player 1, point(s) of speler 1, punt(en)
 let P2P = 1;
-let field = document.getElementById("field");
-let mvDiv = document.getElementById("moveDiv");
-const left = document.getElementById('leftPong');
-const right = document.getElementById('rightPong');
-
-let rect = field.getBoundingClientRect(); 
-let width = rect.width - 25;
-let height = rect.height - 25;
-
-let mvDivRect = mvDiv.getBoundingClientRect();
-let pongLeft = left.getBoundingClientRect();
-let pongRight = right.getBoundingClientRect();
+left = document.getElementById('leftPong');
+right = document.getElementById('rightPong');
+field = document.getElementById("field");
+mvDiv = document.getElementById("moveDiv");
 
 function clear() {
     clearInterval(mijnInterval1);
@@ -27,51 +19,10 @@ function clear() {
     mijnInterval2 = 0;
 }
 
-document.addEventListener("DOMContentLoaded", () => { // voordat de movediv automatisch beweegt gaat hij stilstaan met de clear functie
-    freset();
-});
-
-function moveY() {
-    let yPos = mvDiv.offsetTop;
-    if (yPos + stepY < 0 || yPos + stepY > height) { // hitbox bovenste en onderste lijn.
-        stepY = -stepY;
-    }
-    mvDiv.style.top = (yPos + stepY) + "px"; // laat de movediv op de Y bewegen.
-}
-
-function moveX() {
-    let xPos = mvDiv.offsetLeft;
-    mvDivRect = mvDiv.getBoundingClientRect();
-    mvDiv.style.left = (xPos + stepX) + "px";
-    
-    if (xPos + stepX < 0 || xPos + stepX > width) {
-        stepX = -stepX;
-    }
-
-    // Bat collision 
-    if (mvDivRect.left <= pongLeft.right && mvDivRect.top >= pongLeft.top && mvDivRect.bottom <= pongLeft.bottom) {
-        stepX = -stepX;
-        console.log("Collision");
-    }
-    if (mvDivRect.right >= pongRight.left && mvDivRect.left + mvDivRect.width <= pongRight.left && mvDivRect.top >= pongRight.top && mvDivRect.bottom <= pongRight.bottom) {
-        stepX = -stepX;
-        console.log("Collision");
-    }
-    if (xPos < 1 ) {
-        alert("Game Over"); // elke keer als de movediv de linker kant aanraakt.
-        clearInterval(controlManagerInterval);
-        freset();
-        document.getElementById("count2").innerHTML = P1P;
-        P1P++;
-    } 
-    if (xPos > width - 1) {
-        alert("Game Over");
-        clearInterval(controlManagerInterval);
-        freset();
-        document.getElementById("count1").innerHTML = P2P;
-        P2P++;
-    }
-
+function freset() { // de clear functie zet alles stil, reset de snelheid en zett de movediv in het midden.
+    clear();
+    mvDiv.style.left = "49%";
+    mvDiv.style.top = "50%";
 }
 
 function fstart() {
@@ -87,11 +38,62 @@ function fstop() {
     clear()
 }
 
-function freset() { // de clear functie zet alles stil, reset de snelheid en zett de movediv in het midden.
-    clear();
-    mvDiv.style.left = "49%";
-    mvDiv.style.top = "50%";
+document.addEventListener("DOMContentLoaded", () => { // voordat de movediv automatisch beweegt gaat hij stilstaan met de clear functie
+    freset();
+    rect = field.getBoundingClientRect(); 
+    width = rect.width - 25;
+    height = rect.height - 25;
+
+    mvDivRect = mvDiv.getBoundingClientRect();
+    pongLeft = left.getBoundingClientRect();
+    pongRight = right.getBoundingClientRect();
+});
+
+function moveY() {
+    let yPos = mvDiv.offsetTop;
+    if (yPos + stepY < 0 || yPos + stepY > height) { // hitbox bovenste en onderste lijn.
+        stepY = -stepY;
+    }
+    mvDiv.style.top = (yPos + stepY) + "px"; // laat de movediv op de Y bewegen.
 }
+
+function moveX() {
+    let xPos = mvDiv.offsetLeft;
+    mvDivRect = mvDiv.getBoundingClientRect();
+    
+    if (xPos + stepX < 0 || xPos + stepX > width) {
+        stepX = stepX;
+    }
+    
+    // borders Pongs, borders field.
+    if (mvDivRect.left <= pongLeft.right && mvDivRect.right >= pongLeft.left &&
+        mvDivRect.top <= pongLeft.bottom && mvDivRect.bottom >= pongLeft.top) {
+            stepX = -stepX;
+            console.log("Collision");
+        }
+    if (mvDivRect.right >= pongRight.left && mvDivRect.left <= pongRight.right &&
+        mvDivRect.top <= pongRight.bottom && mvDivRect.bottom >= pongRight.top) {
+            stepX = -stepX;
+            console.log("Collision");
+    }
+    if (xPos < 1 ) {// elke keer als de movediv de linker kant aanraakt.
+        clearInterval(controlManagerInterval);
+        freset();
+        document.getElementById("count2").innerHTML = P1P;
+        P1P++;
+    } 
+    if (xPos > width - 1) {
+        clearInterval(controlManagerInterval);
+        freset();
+        document.getElementById("count1").innerHTML = P2P;
+        P2P++;
+    }
+    mvDiv.style.left = (xPos + stepX) + "px";
+            
+}
+
+
+
 
 
 let pressedKeys = {};
