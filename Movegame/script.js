@@ -1,4 +1,4 @@
-let mijnInterval1 = null; //test
+let mijnInterval1 = null;
 let mijnInterval2 = null;
 let dir = 2;
 let PositieX = 0;
