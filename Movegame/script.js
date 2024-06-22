@@ -19,10 +19,32 @@ function clear() {
     mijnInterval2 = 0;
 }
 
+
 function freset() { // de clear functie zet alles stil, reset de snelheid en zett de movediv in het midden.
     clear();
     ball.style.left = "49%";
     ball.style.top = "50%";
+=======
+function moveX() {
+    let xPos = mvDiv.offsetLeft;
+    mvDivRect = mvDiv.getBoundingClientRect();
+
+    if (xPos + stepX < 0 || xPos + stepX > width) {
+        stepX = -stepX;
+    }
+
+    // Bat collision detection
+    if (mvDivRect.left <= pongLeft.right && mvDivRect.top >= pongLeft.top && mvDivRect.bottom <= pongLeft.bottom) {
+        stepX = -stepX;
+        console.log("Collision");
+    }
+    if (mvDivRect.left >= pongRight.left && mvDivRect.left + mvDivRect.width <= pongRight.left && mvDivRect.top >= pongRight.top && mvDivRect.bottom <= pongRight.bottom) {
+        stepX = -stepX;
+        console.log("Collision");
+    }
+
+    mvDiv.style.left = (xPos + stepX) + "px";
+
 }
 
 function fstart() {
@@ -141,9 +163,12 @@ function controlManager() {
         }
     }
 
+
     console.log("beweging");
     GrootteP1 = left.getBoundingClientRect();
     GrootteP2 = right.getBoundingClientRect();
+=======
+    
 }
 
 document.addEventListener('keydown', keyDownHandler);
