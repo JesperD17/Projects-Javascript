@@ -3,7 +3,7 @@ body {
     justify-content: center;
 }
 
-#field {
+#veld {
     background-color: black;
     height: 600px;
     width: 800px;
@@ -21,17 +21,15 @@ body {
 }
 
 
-#moveDiv {
+#ball {
     background-color: white;
     height: 20px;
     width: 20px;
     position: absolute;
-    top: 50%;
-    left: 49%;
     border-radius: 10px;
 }
 
-#leftPong, #rightPong {
+#linkerSpeler, #rechterSpeler {
     height: 100px;
     width: 20px;
     position: absolute;
@@ -39,13 +37,13 @@ body {
     border: 2px solid #000;
 }
 
-#leftPong {
+#linkerSpeler {
     background-color: blue;
     top: 45%;
     left: 2%;
 }
 
-#rightPong {
+#rechterSpeler {
     background-color: red;
     top: 45%;
     left: 95%;
