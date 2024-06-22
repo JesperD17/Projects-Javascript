@@ -1,7 +1,7 @@
 body {
     display: flex;
-    justify-content: center;
-}
+    justify-content: center; 
+    }
 
 #veld {
     background-color: black;
