@@ -7,12 +7,24 @@
     <title>Pong Game</title>
 </head>
 <body>
-    <div id="field">
-        <div id="moveDiv"></div>
-        <div id="leftPong"></div>
-        <div id="rightPong"></div>
+    <div id="veld">
+        <div id="lijn" style="border-style: dashed;"></div>
+        <div id="ball"></div>
+        <div id="linkerSpeler"></div>
+        <div id="rechterSpeler"></div>
+        <div id="counts">
+            <div id="count1">0</div>
+            <div id="count2">0</div>
+        </div>
     </div>
+
+    
+<div id="btns">
+    <button onclick="fstart()">start</button>
+    <button onclick="fstop()">stop</button>
+    <button onclick="freset()">reset</button>
     <button onclick="moveX()">banaan</button>
     <script src="script.js"></script>
+</div>
 </body>
 </html>

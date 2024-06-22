@@ -3,26 +3,33 @@ body {
     justify-content: center;
 }
 
-#field {
-    background-color: darkgreen;
+#veld {
+    background-color: black;
     height: 600px;
     width: 800px;
     position: relative;
     border: 5px solid black;
 }
 
-#moveDiv {
+#lijn
+{
+    left: 50%;
+    background-color: white;
+    height: 99%;
+    position: absolute;
+    border: 3px;
+}
+
+
+#ball {
     background-color: white;
     height: 20px;
     width: 20px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
-#leftPong, #rightPong {
-    background-color: red;
+#linkerSpeler, #rechterSpeler {
     height: 100px;
     width: 20px;
     position: absolute;
@@ -30,30 +37,33 @@ body {
     border: 2px solid #000;
 }
 
-#leftPong {
+#linkerSpeler {
+    background-color: blue;
     top: 45%;
     left: 2%;
 }
 
-#rightPong {
+#rechterSpeler {
+    background-color: red;
     top: 45%;
     left: 95%;
 }
 
 button {
-    height: 40px;
+    height: 80px;
     width: 80px;
-    margin: 10px;
-}
-
-#rightbar {
-    padding: 10px;
+    color: white;
+    background-color: black;
 }
 
 #btns {
     border: 3px solid grey;
     border-radius: 15px;
+    padding: 5px;
     margin: 2px;
+    display: flex;
+    flex-direction:column;
+    gap: 30%;
 }
 
 #XenY, #score {
@@ -67,3 +77,21 @@ button {
 #stapX, #stapY {
     padding: 10px;
 }
+
+#counts
+{
+    color: white;
+    font-size: 60px;
+}
+
+#count1
+{
+    position: absolute;
+    left: 44%;
+}
+#count2
+{
+    position: absolute;
+    left: 53%;
+}
+

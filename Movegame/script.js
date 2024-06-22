@@ -1,39 +1,30 @@
 let mijnInterval1 = null;
 let mijnInterval2 = null;
-let initStep = 1;
-let stepX = 0;
-let stepY = 0;
-let stepYUp = -10;
-let stepXDown = 10;
-let field = document.getElementById("field");
-let mvDiv = document.getElementById("moveDiv");
-const left = document.getElementById('leftPong');
-const right = document.getElementById('rightPong');
+let dir = 2;
+let PositieX = 0;
+let PositieY = 0;
+let SnelheidYomhoog = -10;
+let SnelheidXomlaag = 10;
+let P1P = 1; //P1P = player 1, point(s) of speler 1, punt(en)
+let P2P = 1;
+left = document.getElementById('linkerSpeler');
+right = document.getElementById('rechterSpeler');
+field = document.getElementById("veld");
+ball = document.getElementById("ball");
 
-let rect = field.getBoundingClientRect(); 
-let width = rect.width - 25;
-let height = rect.height - 25;
-
-let mvDivRect = mvDiv.getBoundingClientRect();
-let pongLeft = left.getBoundingClientRect();
-let pongRight = right.getBoundingClientRect();
-
-document.addEventListener("DOMContentLoaded", () => { 
+function clear() {
     clearInterval(mijnInterval1);
     clearInterval(mijnInterval2);
-    mijnInterval1 = null;
-    mijnInterval2 = null;
-    fstart();
-});
-
-function moveY() {
-    let yPos = mvDiv.offsetTop;
-    if (yPos + stepY < 0 || yPos + stepY > height) {
-        stepY = -stepY;
-    }
-    mvDiv.style.top = (yPos + stepY) + "px";
+    mijnInterval1 = 0;
+    mijnInterval2 = 0;
 }
 
+
+function freset() { // de clear functie zet alles stil, reset de snelheid en zett de movediv in het midden.
+    clear();
+    ball.style.left = "49%";
+    ball.style.top = "50%";
+=======
 function moveX() {
     let xPos = mvDiv.offsetLeft;
     mvDivRect = mvDiv.getBoundingClientRect();
@@ -53,33 +44,79 @@ function moveX() {
     }
 
     mvDiv.style.left = (xPos + stepX) + "px";
+
 }
 
 function fstart() {
     if (!mijnInterval1) {
         mijnInterval1 = setInterval(moveY, 10);
         mijnInterval2 = setInterval(moveX, 10);
-        stepX = Math.round(Math.random()) ? -initStep : initStep;
-        stepY = Math.round(Math.random()) ? -initStep : initStep;
+        PositieX = Math.round(Math.random()) ? -dir : dir; // operator.
+        PositieY = Math.round(Math.random()) ? -dir : dir;
     }
 }
 
 function fstop() {
-    clearInterval(mijnInterval1);
-    clearInterval(mijnInterval2);
-    mijnInterval1 = null;
-    mijnInterval2 = null;
+    clear()
 }
 
-function freset() {
-    clearInterval(mijnInterval1);
-    clearInterval(mijnInterval2);
-    mijnInterval1 = null;
-    mijnInterval2 = null;
-    
-    mvDiv.style.left = "50%";
-    mvDiv.style.top = "50%";
+document.addEventListener("DOMContentLoaded", () => { // voordat de movediv automatisch beweegt gaat hij stilstaan met de clear functie.
+    freset();
+    rect = field.getBoundingClientRect(); //rect haalt top, bottom, left, right, width en height op vanuit een div. 
+    width = rect.width - 25;
+    height = rect.height - 25;
+
+    ballRect = ball.getBoundingClientRect();
+    GrootteP1 = left.getBoundingClientRect();
+    GrootteP2 = right.getBoundingClientRect();
+});
+
+function moveY() {
+    let huidigePositie = ball.offsetTop;
+    if (huidigePositie + PositieY < 0 || huidigePositie + PositieY > height) { // hitbox bovenste en onderste lijn.
+        PositieY = -PositieY;
+    }
+    ball.style.top = (huidigePositie + PositieY) + "px"; // laat de movediv op de Y bewegen.
 }
+
+function moveX() {
+    let xPos = ball.offsetLeft;
+    ballRect = ball.getBoundingClientRect();
+    
+    if (xPos + PositieX < 0 || xPos + PositieX > width) {
+        PositieX = PositieX;
+    }
+    
+    // borders spelers, borders field.
+    if (ballRect.left <= GrootteP1.right && ballRect.right >= GrootteP1.left &&
+        ballRect.top <= GrootteP1.bottom && ballRect.bottom >= GrootteP1.top) {
+            PositieX = -PositieX;
+            console.log("links");
+    }
+    if (ballRect.right >= GrootteP2.left && ballRect.left <= GrootteP2.right &&
+        ballRect.top <= GrootteP2.bottom && ballRect.bottom >= GrootteP2.top) {
+            PositieX = -PositieX;
+            console.log("rechts");
+    }
+    if (xPos < 1 ) {// elke keer als de movediv de linker kant aanraakt.
+        clearInterval(controlManagerInterval);
+        freset();
+        document.getElementById("count2").innerHTML = P1P;
+        P1P++;
+    } 
+    if (xPos > width - 1) {
+        clearInterval(controlManagerInterval);
+        freset();
+        document.getElementById("count1").innerHTML = P2P;
+        P2P++;
+    }
+    ball.style.left = (xPos + PositieX) + "px";
+    
+}
+
+
+
+
 
 let pressedKeys = {};
 let controlManagerInterval;
@@ -102,38 +139,36 @@ function keyUpHandler(event) {
 }
 
 function controlManager() {
-    if (pressedKeys['KeyW']) {
-        let yPos = left.offsetTop;
-        if (yPos + stepYUp > 0) {
-            left.style.top = (yPos + stepYUp) + "px";
+    if (pressedKeys['KeyW']) { // beweegt de linker speler omhoog
+        let linkerSpelerYpos = left.offsetTop;
+        if (linkerSpelerYpos + SnelheidYomhoog > 0) {
+            left.style.top = (linkerSpelerYpos + SnelheidYomhoog) + "px";
         }
-    } else if (pressedKeys['KeyS']) {
-        let yPos = left.offsetTop;
-        if (yPos + left.offsetHeight + stepXDown < height) {
-            left.style.top = (yPos + stepXDown) + "px";
-        }
-    }
-
-    if (pressedKeys['ArrowUp']) {
-        let yPos = right.offsetTop;
-        if (yPos + stepYUp > 0) {
-            right.style.top = (yPos + stepYUp) + "px";
-        }
-    } else if (pressedKeys['ArrowDown']) {
-        let yPos = right.offsetTop;
-        if (yPos + right.offsetHeight + stepXDown < height) {
-            right.style.top = (yPos + stepXDown) + "px";
+    } else if (pressedKeys['KeyS']) { // beweegt de linker speler omlaag
+        let linkerSpelerYpos = left.offsetTop;
+        if (linkerSpelerYpos + left.offsetHeight + SnelheidXomlaag < height) {
+            left.style.top = (linkerSpelerYpos + SnelheidXomlaag) + "px";
         }
     }
 
-    console.log("Move");
-    pongLeft = left.getBoundingClientRect();
-    pongRight = right.getBoundingClientRect();
-    // if (controlManagerRectRefreshIndex >= 10) {
-    //     controlManagerRectRefreshIndex = 0;
-    // } else {
-    //     controlManagerRectRefreshIndex += 1;
-    // }
+    if (pressedKeys['ArrowUp']) { //beweegt de rechter speler omhoog
+        let linkerSpelerYpos = right.offsetTop;
+        if (linkerSpelerYpos + SnelheidYomhoog > 0) {
+            right.style.top = (linkerSpelerYpos + SnelheidYomhoog) + "px";
+        }
+    } else if (pressedKeys['ArrowDown']) { //beweegt de linker speler omhoog
+        let linkerSpelerYpos = right.offsetTop;
+        if (linkerSpelerYpos + right.offsetHeight + SnelheidXomlaag < height) {
+            right.style.top = (linkerSpelerYpos + SnelheidXomlaag) + "px";
+        }
+    }
+
+
+    console.log("beweging");
+    GrootteP1 = left.getBoundingClientRect();
+    GrootteP2 = right.getBoundingClientRect();
+=======
+    
 }
 
 document.addEventListener('keydown', keyDownHandler);
