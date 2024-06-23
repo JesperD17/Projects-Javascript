@@ -21,8 +21,12 @@ function clear() {
 
 function freset() { // de clear functie zet alles stil, reset de snelheid en zett de movediv in het midden.
     clear();
-    ball.style.left = "49%";
-    ball.style.top = "50%";
+    console.log('Field dimensions:', field.offsetWidth, field.offsetHeight);
+
+    ball.style.left = "49%"
+    ball.style.top = "50%"
+
+    console.log('Ball position:', ball.style.left, ball.style.top);
 }
 
 function fstart() {
@@ -44,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => { // voordat de movediv auto
     width = rect.width - 25;
     height = rect.height - 25;
 
-    ballRect = ball.getBoundingClientRect();
     GrootteP1 = left.getBoundingClientRect();
     GrootteP2 = right.getBoundingClientRect();
 });
@@ -76,7 +79,7 @@ function moveX() {
             PositieX = -PositieX;
             console.log("rechts");
     }
-    if (xPos < 1 ) {// elke keer als de movediv de linker kant aanraakt.
+    if (xPos < 1) {// elke keer als de movediv de linker kant aanraakt.
         clearInterval(controlManagerInterval);
         freset();
         document.getElementById("count2").innerHTML = P1P;
