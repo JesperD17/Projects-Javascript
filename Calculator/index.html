@@ -26,10 +26,10 @@ let display = document.getElementById('display');
         for (let i = 1; i <= 18; i++) { //button loop
             let button = document.createElement("button");
             button.id = "BTN" + i;
-
             if (i === 1) {
-                button.classList.add("wide");
                 button.innerHTML = "<img src=\"bx-arrow-back.svg\">";
+                button.classList.add("wide");
+                
                 button.addEventListener('click', () => {
                     input = input.slice(0, -1);
                     updateDisplay(input || 'Calculator');
@@ -49,12 +49,12 @@ let display = document.getElementById('display');
             if (i === 13) button.innerHTML = "3";
             if (i === 14) button.innerHTML = "+";
             if (i === 16) button.innerHTML = "0";
-            if (i === 17) button.innerHTML = ",";
+            if (i === 17) button.innerHTML = ".";
             if (i === 18) {
                 button.innerHTML = "=";
                 button.addEventListener('click', () => {
                     try {
-                        let rekenen = input.replace(/x/, '*  ').replace(/,/, '.');
+                        let rekenen = input.replace(/x/, '*  ');
                         let resultaat = eval(rekenen);
                         updateDisplay(resultaat);
                         input = resultaat.toString();
