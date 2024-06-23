@@ -23,8 +23,8 @@ function freset() { // de clear functie zet alles stil, reset de snelheid en zet
     clear();
     console.log('Field dimensions:', field.offsetWidth, field.offsetHeight);
 
-    ball.style.left = "49%"
-    ball.style.top = "50%"
+    ball.style.left = "50%";
+    ball.style.top = "50%";
 
     console.log('Ball position:', ball.style.left, ball.style.top);
 }
@@ -79,13 +79,13 @@ function moveX() {
             PositieX = -PositieX;
             console.log("rechts");
     }
-    if (xPos < 1) {// elke keer als de movediv de linker kant aanraakt.
+    if (xPos < 0) {// elke keer als de movediv de linker kant aanraakt.
         clearInterval(controlManagerInterval);
         freset();
         document.getElementById("count2").innerHTML = P1P;
         P1P++;
     } 
-    if (xPos > width - 1) {
+    if (xPos > width - 0) {
         clearInterval(controlManagerInterval);
         freset();
         document.getElementById("count1").innerHTML = P2P;
@@ -141,10 +141,12 @@ function controlManager() {
         let linkerSpelerYpos = right.offsetTop;
         if (linkerSpelerYpos + right.offsetHeight + SnelheidXomlaag < height) {
             right.style.top = (linkerSpelerYpos + SnelheidXomlaag) + "px";
+            
         }
+        
     }
-
     console.log("beweging");
+    
     GrootteP1 = left.getBoundingClientRect();
     GrootteP2 = right.getBoundingClientRect();
 }
