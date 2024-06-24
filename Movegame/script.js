@@ -23,7 +23,7 @@ function freset() { // de clear functie zet alles stil, reset de snelheid en zet
     clear();
     console.log('Field dimensions:', field.offsetWidth, field.offsetHeight);
 
-    ball.style.left = "50%";
+    ball.style.left = "49%";
     ball.style.top = "50%";
 
     console.log('Ball position:', ball.style.left, ball.style.top);
